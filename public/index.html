@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app="PantryApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Pantry</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="/javascript/app.js"></script>
+  </head>
+  <body ng-controller="MainController as ctrl">
+    <h1>{{ ctrl.hello }}</h1>
+
+    <h4>Add Food</h4>
+      <form ng-submit="ctrl.addFood()">
+        <!-- Select Storage Type: use raio or drop down selector -->
+        <input type="radio" ng-click="ctrl.storage = ctrl.formData.storage_id" ng-model="ctrl.formData.storage_id" value="1"><h3>Refridgerator</h3>
+        <input type="radio" ng-click="ctrl.storage = ctrl.formData.storage_id" ng-model="ctrl.formData.storage_id" value="2"><h3>Freezer</h3>
+        <input type="radio" ng-click="ctrl.storage = ctrl.formData.storage_id" ng-model="ctrl.formData.storage_id" value="3"><h3>Pantry</h3>
+        <!-- Select Container Type:Yeah! use raio or drop down selector -->
+        <input type="radio" ng-click="ctrl.container = ctrl.formData.container_id" ng-model="ctrl.formData.container_id" value="1"><h3>Box</h3>
+        <input type="radio" ng-click="ctrl.container = ctrl.formData.container_id" ng-model="ctrl.formData.container_id" value="2"><h3>Can</h3>
+        <input type="radio" ng-click="ctrl.container = ctrl.formData.container_id" ng-model="ctrl.formData.container_id" value="3"><h3>Bag</h3>
+
+        <input type="text" ng-model="ctrl.formData.name" placeholder="Name">
+        <input type="date" ng-model="ctrl.formData.purchased_date" placeholder="yyyy/mm/dd"/>
+        <input type="date" ng-model="ctrl.formData.experation_date" placeholder="yyyy/mm/dd"/><br/>
+        <input class="submit" type="submit"/>
+      </form>
+
+    <div ng-repeat="food in ctrl.foods">
+      <h2>{{ food.name }}</h2>
+      <p>{{food.purchased_date}}</p>
+      <p>{{food.experation_date}}</p>
+    </div>
+  </body>
+</html>

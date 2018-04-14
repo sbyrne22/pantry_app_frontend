@@ -1,0 +1,24 @@
+{
+  "name": "pantry_app_frontend",
+  "version": "1.0.0",
+  "description": "Food Log app Front-End",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbyrne22/pantry_app_frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sbyrne22/pantry_app_frontend/issues"
+  },
+  "homepage": "https://github.com/sbyrne22/pantry_app_frontend#readme"
+}
