@@ -1,0 +1,15 @@
+nav {
+  text-align: center;
+  background: yellow; }
+
+.content {
+  border: 1px solid Orange; }
+
+.foodItem {
+  background: red;
+  display: flex; }
+
+.name, .date {
+  margin-right: 10px; }
+
+/*# sourceMappingURL=main.css.map */

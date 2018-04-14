@@ -14,6 +14,7 @@ app.controller('MainController', ['$http', function($http){
 	  }).then(response => {
 	    console.log("response: ", response);
 	    this.foods = response.data.foods;
+
 	  }).catch(reject => {
 	    console.log("reject ", reject);
 	  });
@@ -26,8 +27,8 @@ app.controller('MainController', ['$http', function($http){
 			url: 'http://localhost:3000/storages/' + this.storage + '/containers/' + this.container + '/foods',
 			data: this.formData
 		}).then(response => {
-			console.log('response: ', response);
-			this.foods.unshift(response.data);
+			console.log('response: ', response.data.food);
+			this.foods.unshift(response.data.food);
 		}).catch(reject => {
 			console.log('reject: ', reject);
 		});
