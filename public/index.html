@@ -14,30 +14,59 @@
       <h1>Pantry</h1>
     </nav>
 
-    <div class="content">
-      <h4>Add Food</h4>
-        <form ng-submit="ctrl.addFood()">
+    <main>
+      <h4 class="addBtn">Add Food</h4>
+      <div class="foodForm">
+        <form ng-submit="ctrl.GetFood()">
           <!-- Select Storage Type: use raio or drop down selector -->
-          <input type="radio" ng-click="ctrl.storage = ctrl.formData.storage_id" ng-model="ctrl.formData.storage_id" value="1"><h3>Refridgerator</h3>
-          <input type="radio" ng-click="ctrl.storage = ctrl.formData.storage_id" ng-model="ctrl.formData.storage_id" value="2"><h3>Freezer</h3>
-          <input type="radio" ng-click="ctrl.storage = ctrl.formData.storage_id" ng-model="ctrl.formData.storage_id" value="3"><h3>Pantry</h3>
+          <div class="storageInputs">
+            <input type="radio" ng-click="ctrl.storage = ctrl.formData.storage_id" ng-model="ctrl.formData.storage_id" value="1"><h3>Refridgerator</h3>
+            <input type="radio" ng-click="ctrl.storage = ctrl.formData.storage_id" ng-model="ctrl.formData.storage_id" value="2"><h3>Freezer</h3>
+            <input type="radio" ng-click="ctrl.storage = ctrl.formData.storage_id" ng-model="ctrl.formData.storage_id" value="3"><h3>Pantry</h3>
+          </div>
+
           <!-- Select Container Type:Yeah! use raio or drop down selector -->
-          <input type="radio" ng-click="ctrl.container = ctrl.formData.container_id" ng-model="ctrl.formData.container_id" value="1"><h3>Box</h3>
-          <input type="radio" ng-click="ctrl.container = ctrl.formData.container_id" ng-model="ctrl.formData.container_id" value="2"><h3>Can</h3>
-          <input type="radio" ng-click="ctrl.container = ctrl.formData.container_id" ng-model="ctrl.formData.container_id" value="3"><h3>Bag</h3>
+          <div class="containerInputs">
+            <input type="radio" ng-click="ctrl.container = ctrl.formData.container_id" ng-model="ctrl.formData.container_id" value="1"><h3>Box</h3>
+            <input type="radio" ng-click="ctrl.container = ctrl.formData.container_id" ng-model="ctrl.formData.container_id" value="2"><h3>Can</h3>
+            <input type="radio" ng-click="ctrl.container = ctrl.formData.container_id" ng-model="ctrl.formData.container_id" value="3"><h3>Bag</h3>
+          </div>
+
 
           <input type="text" ng-model="ctrl.formData.name" placeholder="Name">
           <input type="date" ng-model="ctrl.formData.purchased_date" placeholder="yyyy/mm/dd"/>
           <input type="date" ng-model="ctrl.formData.experation_date" placeholder="yyyy/mm/dd"/><br/>
           <input class="submit" type="submit"/>
         </form>
+      </div>
 
-      <div class="foodItem" ng-repeat="food in ctrl.foods">
+      <div class="sortBox">
+        <h3>Sort By:</h3>
+        <form ng-submit="ctrl.GetFoods(getStorage, getContainer)">
+          <select class="storageOp" name="" ng-model="getStorage">
+            <option value="all">All</option>
+            <option value="fridge">Refridgerator</option>
+            <option value="freezer">Freezer</option>
+            <option value="pantry">Pantry</option>
+          </select>
+          <select class="containerOp" name="" ng-model="getContainer">>
+            <option value="all">All</option>
+            <option value="box">box</option>
+            <option value="can">can</option>
+            <option value="bag">bag</option>
+          </select>
+          <input class="submit" type="submit"/>
+        </form>
+
+        <h3>Edit</h3>
+      </div>
+
+      <div class="foodItem" ng-repeat="food in ctrl.foods"> <!-- ng-if="food.container_id == 1" -->
         <h2 class="name">{{ food.name }}</h2>
         <p class="date">{{food.purchased_date}}</p>
         <p class="date">{{food.experation_date}}</p>
       </div>
-    </div>
-
+    </main>
+    <button type="button" ng-click="ctrl.myFunction()">Set background color</button>
   </body>
 </html>

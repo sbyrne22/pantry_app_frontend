@@ -5,19 +5,35 @@ app.controller('MainController', ['$http', function($http){
 	this.hello = 'oh hai!';
   this.foods = [];
   this.formData = {};
+	this.getStorage = "";
+	this.getContainer = "";
+	this.getUrl = "";
   console.log("What!");
 
-	const GetFoods = () => {
+	this.GetFoods = (storage, container) => {
+		console.log("storage = ", storage, "Container = ", container);
+		if (((storage == "all") || (storage == null)) && ((container == "all") || (container == null))) {
+			this.getUrl = "http://localhost:3000/foods"
+			console.log("Url = ", this.getUrl);
+		} else if ((container == "all") || (container == null)){
+			this.getUrl = "http://localhost:3000/" + storage
+			console.log("Url = ", this.getUrl);
+		} else if ((storage == "all") || (storage == null)){
+			this.getUrl = "http://localhost:3000/" + container
+			console.log("Url = ", this.getUrl);
+		}
 	  $http({
 	    method: 'GET',
-	    url: 'http://localhost:3000/foods',
+			url: this.getUrl,
+
 	  }).then(response => {
 	    console.log("response: ", response);
 	    this.foods = response.data.foods;
-
+			// console.log(this.foods);
 	  }).catch(reject => {
 	    console.log("reject ", reject);
 	  });
+
 	};
 
 	this.addFood = () => {
@@ -34,5 +50,13 @@ app.controller('MainController', ['$http', function($http){
 		});
 	};
 
-  GetFoods();
+/////////////////////
+	this.myFunction = () => {
+		 this.foodItem = document.body.getElementsByClassName('foodItem');
+		 console.log(this.foodItem);
+		this.foodItem[0].style.backgroundColor = "blue";
+	};
+/////////////////////
+
+  // GetFoods("all", "all");
 }]);

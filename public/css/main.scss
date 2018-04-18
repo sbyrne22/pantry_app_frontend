@@ -1,6 +1,7 @@
 // * {
 //   border: 1px solid purple;
 // }
+
 nav {
   text-align: center;
   background: yellow;
@@ -11,7 +12,25 @@ nav {
 .foodItem {
   background: red;
   display: flex;
+  border: 1px solid black;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 .name, .date {
   margin-right: 10px;
+}
+.addBtn {
+  text-align: center;
+  margin: 0 auto;
+  width: 100px;
+  border-radius: 5px;
+  background: green;
+  cursor: pointer;
+}
+.foodForm {
+  display: none;
+}
+.sortBox {
+  display: flex;
+  align-items: center;
 }
