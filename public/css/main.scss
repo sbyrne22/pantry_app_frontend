@@ -14,10 +14,15 @@ nav {
   display: flex;
   border: 1px solid black;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
-.name, .date {
-  margin-right: 10px;
+.name, .date, .storageType, .containerType, .label {
+  margin: 5px;
+  width: 20%;
+  border: 1px solid purple;
+}
+.date, .storageType, .containerType, .label {
+  text-align: center;
 }
 .addBtn {
   text-align: center;
@@ -32,5 +37,23 @@ nav {
 }
 .sortBox {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.list {
+  border: 1px solid blue;
+}
+.showSelector {
+  display: flex;
+  align-items: center;
+}
+.sortSelector {
+  display: flex;
+  align-items: center;
+}
+.labelBox {
+  display: flex;
+  border: 1px solid black;
+  justify-content: space-between;
   align-items: center;
 }

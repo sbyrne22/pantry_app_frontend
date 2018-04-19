@@ -50,6 +50,14 @@ app.controller('MainController', ['$http', function($http){
 		});
 	};
 
+	// this.sort = (sortie) => {
+	// 	if (sortie == 1) {
+	// 		// sort by purchased_date
+	// 	} else if (sortie == 2) {
+	// 		// sort by expiration_date
+	// 	}
+	// }
+
 /////////////////////
 	this.myFunction = () => {
 		 this.foodItem = document.body.getElementsByClassName('foodItem');
@@ -58,5 +66,5 @@ app.controller('MainController', ['$http', function($http){
 	};
 /////////////////////
 
-  // GetFoods("all", "all");
+  this.GetFoods("all", "all");
 }]);

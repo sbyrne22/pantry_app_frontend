@@ -40,33 +40,59 @@
         </form>
       </div>
 
-      <div class="sortBox">
-        <h3>Sort By:</h3>
-        <form ng-submit="ctrl.GetFoods(getStorage, getContainer)">
-          <select class="storageOp" name="" ng-model="getStorage">
-            <option value="all">All</option>
-            <option value="fridge">Refridgerator</option>
-            <option value="freezer">Freezer</option>
-            <option value="pantry">Pantry</option>
-          </select>
-          <select class="containerOp" name="" ng-model="getContainer">>
-            <option value="all">All</option>
-            <option value="box">box</option>
-            <option value="can">can</option>
-            <option value="bag">bag</option>
-          </select>
-          <input class="submit" type="submit"/>
-        </form>
-
-        <h3>Edit</h3>
+      <div class="list">
+        <div class="sortBox">
+          <div class="showSelector">
+            <h3>Show Only:</h3>
+            <form ng-submit="ctrl.GetFoods(getStorage, getContainer)">
+              <select class="storageOp" name="" ng-model="getStorage">
+                <option value="all">All</option>
+                <option value="fridge">Refridgerator</option>
+                <option value="freezer">Freezer</option>
+                <option value="pantry">Pantry</option>
+              </select>
+              <select class="containerOp" name="" ng-model="getContainer">>
+                <option value="all">All</option>
+                <option value="box">box</option>
+                <option value="can">can</option>
+                <option value="bag">bag</option>
+              </select>
+              <input class="submit" type="submit"/>
+            </form>
+          </div>
+          <div class="sortSelector">
+            <h3>Sort By:</h3>
+            <!-- <form ng-submit="ctrl.GetFoods(getStorage, getContainer)"> -->
+              <select class="storageOp" name="" ng-model="selectOrder">
+                <option value="purchased_date">Purchase Date</option>
+                <option value="experation_date">Experation Date</option>
+              </select>
+              <!-- <input class="submit" type="submit"/> -->
+            <!-- </form> -->
+          </div>
+          <div class="search">
+            search: <input type="text" ng-model="search">
+          </div>
+          <h3>Edit</h3>
+        </div>
+        <div class="labelBox">
+          <div class="label">Food Name</div>
+          <div class="label">Stored In</div>
+          <div class="label">Container Type</div>
+          <div class="label">Purchased Date</div>
+          <div class="label">Experation Date</div>
+        </div>
+        <div class="foodItem" ng-repeat="food in ctrl.foods | filter:search | orderBy: selectOrder"> <!-- ng-if="food.container_id == 1" -->
+          <h2 class="name">{{ food.name }}</h2>
+          <p class="storageType">{{food.storage_id}}</p>
+          <p class="containerType">{{food.container_id}}</p>
+          <p class="date">{{food.purchased_date}}</p>
+          <p class="date">{{food.experation_date}}</p>
+        </div>
+      </main>
+      <button type="button" ng-click="ctrl.myFunction()">Set background color</button>
       </div>
 
-      <div class="foodItem" ng-repeat="food in ctrl.foods"> <!-- ng-if="food.container_id == 1" -->
-        <h2 class="name">{{ food.name }}</h2>
-        <p class="date">{{food.purchased_date}}</p>
-        <p class="date">{{food.experation_date}}</p>
-      </div>
-    </main>
-    <button type="button" ng-click="ctrl.myFunction()">Set background color</button>
+
   </body>
 </html>
