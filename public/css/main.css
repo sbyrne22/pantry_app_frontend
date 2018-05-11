@@ -1,24 +1,21 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+* {
+  font-family: "Source Sans Pro", sans-serif; }
+
 nav {
   text-align: center;
-  background: yellow; }
-
-.content {
-  border: 1px solid Orange; }
-
-.foodItem {
-  background: red;
+  border-top: 1px solid black;
   display: flex;
-  border: 1px solid black;
   justify-content: space-between;
-  align-items: center; }
+  align-items: center;
+  padding: 3px 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
 
-.name, .date, .storageType, .containerType, .label {
-  margin: 5px;
-  width: 20%;
-  border: 1px solid purple; }
+h1 {
+  font-family: "Source Sans Pro", sans-serif; }
 
-.date, .storageType, .containerType, .label {
-  text-align: center; }
+p, h1, h2, h3, h4, h5 {
+  margin: 0; }
 
 .addBtn {
   text-align: center;
@@ -26,18 +23,137 @@ nav {
   width: 100px;
   border-radius: 5px;
   background: green;
-  cursor: pointer; }
+  cursor: pointer;
+  display: inline-block; }
+
+.content {
+  border: 1px solid Orange; }
+
+.colorGuide {
+  width: 140px;
+  margin-bottom: 5px; }
+
+.colorSet {
+  display: flex;
+  margin-right: 10px;
+  justify-content: flex-start;
+  margin-bottom: 5px; }
+
+.color {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  border-radius: 10px; }
+
+.colorKey {
+  display: flex;
+  border-radius: 0 20px 20px 0;
+  border: 1px solid black;
+  font-family: "Source Sans Pro", sans-serif; }
+
+.colorKeyGhost {
+  width: 150px;
+  height: 127px; }
+
+.expDate, .purchDate, .storageType, .containerType, .label {
+  text-align: center; }
+
+.expDate {
+  color: #FF5E5B;
+  height: 40px; }
+
+.expColor {
+  background: #FF5E5B; }
+
+.formModel {
+  background: rgba(100, 100, 100, 0.7);
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed; }
 
 .foodForm {
-  display: none; }
+  background: grey;
+  width: 500px;
+  margin: 50px auto; }
 
-.sortBox {
+.foodBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+.foodItem {
+  margin: 3px;
+  border-radius: 10px;
+  overflow: hidden; }
+
+.foodTabUpInput {
+  width: 210px;
   display: flex;
   align-items: center;
   justify-content: space-between; }
 
+.fridge {
+  background: #646663; }
+
+.freezer {
+  background: #E0FBFC; }
+
+.foodFormInput {
+  width: 50px;
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid black;
+  outline: none; }
+
+.foodFormInputDate {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none; }
+
 .list {
-  border: 1px solid blue; }
+  padding-top: 10px;
+  margin: 0 auto;
+  font-family: "Source Sans Pro", sans-serif; }
+
+.listNav {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  border: 1px solid purple;
+  margin: 0 auto;
+  background: white; }
+
+.listTabs {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  align-items: center;
+  box-shadow: 0px -1px 2px 1px rgba(0, 0, 0, 0.1) inset; }
+
+.name, .expDate, .purchDate, .storageType, .containerType, .label {
+  width: 150px;
+  text-align: center; }
+
+.name {
+  height: 40px;
+  border-radius: 10px 5px 5px 10px; }
+
+.nameBox {
+  text-align: center; }
+
+.purchDate {
+  color: #7CE577;
+  height: 40px; }
+
+.pantry {
+  background: #846452; }
+
+.purColor {
+  background: #7CE577; }
+
+.storageType {
+  display: none; }
 
 .showSelector {
   display: flex;
@@ -47,10 +163,87 @@ nav {
   display: flex;
   align-items: center; }
 
-.labelBox {
-  display: flex;
+.sortBtnExp {
+  cursor: pointer;
+  background: #FF5E5B;
+  border-radius: 5px;
+  padding: 1px 2px 2px 2px;
+  margin: 2px 4px 2px 4px;
+  box-shadow: 0px 2px 2px 0px #646464, 0 4px 8px 0 #646464;
+  font-size: 12px; }
+
+.sortBtnPur {
+  cursor: pointer;
+  background: #7CE577;
+  border-radius: 5px;
+  padding: 1px 2px 2px 2px;
+  margin: 2px 0 2px 4px;
+  box-shadow: 0px 2px 2px 0px #646464, 0 4px 8px 0 #646464;
+  font-size: 12px; }
+
+.sortBtnExp:active {
+  padding-top: 2px;
+  box-shadow: 0px 2px 4px #646464;
+  margin-bottom: 1px; }
+
+.sortBtnPur:active {
+  padding-top: 2px;
+  box-shadow: 0px 2px 4px #646464;
+  margin-bottom: 1px; }
+
+.search {
+  outline: none;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding: 5px;
+  border-radius: 5px 5px 0 0; }
+
+.search:focus {
+  border-top: 1px solid #7CE577;
+  border-left: 1px solid #7CE577;
+  border-right: 1px solid #7CE577; }
+
+.storageInputs, .containerInputs {
+  display: flex; }
+
+.tab {
+  cursor: pointer;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding: 5px;
+  border-radius: 5px 5px 0 0; }
+
+.tabRight {
+  display: flex; }
+
+.tabLeft {
+  margin-bottom: 0; }
+
+.tabUp {
+  font-size: 12px;
   border: 1px solid black;
-  justify-content: space-between;
-  align-items: center; }
+  border-radius: 20px 20px 0 0;
+  margin-right: 2px;
+  width: 253px;
+  padding: 10px 20px 10px 20px;
+  box-sizing: border-box; }
+
+.tabUpTitle {
+  text-align: center;
+  margin-bottom: 2px; }
+
+.tabUpItem {
+  margin-bottom: 5px; }
+
+.tabUpFlexBox {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between; }
+
+@media screen and (max-width: 423px) {
+  .colorKeyGhost {
+    border: 1px solid black; } }
 
 /*# sourceMappingURL=main.css.map */

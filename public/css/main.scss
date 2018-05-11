@@ -1,29 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
 // * {
 //   border: 1px solid purple;
 // }
 
+$btnRadius: 5px;
+$btnPadding: 1px 2px 2px 2px;
+$btnMarginExp: 2px 4px 2px 4px;
+$btnMarginPur: 2px 0 2px 4px;
+$btnShadow: 0px 2px 2px 0px rgba(100, 100, 100, 1), 0 4px 8px 0 rgba(100, 100, 100, 1);
+$btnShadowACTIVE: 0px 2px 4px rgba(100, 100, 100, 1);
+$btnTopPaddingACTIVE: 2px;
+$btnBottomMarginACTIVE: 1px;
+$btnFontSize: 12px;
+$ssPro: 'Source Sans Pro', sans-serif;
+
+* {
+  font-family: $ssPro;
+}
+
 nav {
   text-align: center;
-  background: yellow;
-}
-.content {
-  border: 1px solid Orange;
-}
-.foodItem {
-  background: red;
+  // background: yellow;
+  border-top: 1px solid black;
   display: flex;
-  border: 1px solid black;
   justify-content: space-between;
   align-items: center;
+  padding: 3px 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.name, .date, .storageType, .containerType, .label {
-  margin: 5px;
-  width: 20%;
-  border: 1px solid purple;
+h1 {
+  font-family: $ssPro;
 }
-.date, .storageType, .containerType, .label {
-  text-align: center;
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
 }
+
 .addBtn {
   text-align: center;
   margin: 0 auto;
@@ -31,17 +43,189 @@ nav {
   border-radius: 5px;
   background: green;
   cursor: pointer;
+  display: inline-block;
+}
+.content {
+  border: 1px solid Orange;
+}
+// .centerContent {
+//   width: 200px;
+//   border: 1px solid black;
+//   margin: 0 auto;
+// }
+.colorGuide {
+  // display: flex;
+  width: 140px;
+  margin-bottom: 5px;
+}
+.colorSet {
+  display: flex;
+  margin-right: 10px;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+.color {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  border-radius: 10px;
+}
+.colorKey {
+  display: flex;
+  // width: 273px;
+  // height: 100px;
+  border-radius: 0 20px 20px 0;
+  border: 1px solid black;
+  font-family: $ssPro;
+}
+.colorKeyGhost {
+  width: 150px;
+  height: 127px;
+  // border: 1px solid black;
+}
+
+
+.expDate, .purchDate, .storageType, .containerType, .label {
+  text-align: center;
+}
+
+.expDate {
+  // background: red;
+  // color: #CF5246;
+  color: #FF5E5B;
+  // border-radius: 0 6px 6px 0;
+  height: 40px;
+}
+.expColor {
+  background: #FF5E5B;
+}
+
+.formModel {
+  // display: none;
+  background: rgba(100, 100, 100, .7);
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
 }
 .foodForm {
-  display: none;
+  background: grey;
+  width: 500px;
+  // position: fixed;
+  margin: 50px auto;
 }
-.sortBox {
+
+
+
+.foodBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.foodItem {
+  // display: flex;
+  // border: 1px solid black;
+  margin: 3px;
+  border-radius: 10px;
+  overflow: hidden;
+  // justify-content: center;
+  // align-items: center;
+  // width: 70%;
+}
+
+.foodTabUpInput {
+  width: 210px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+.fridge {
+  background: #646663;
+}
+.freezer {
+  background: #E0FBFC;
+}
+.foodFormInput {
+  width: 50px;
+  // background: red;
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid black;
+  outline: none;
+  // box-shadow: none;
+}
+.foodFormInputDate {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
 .list {
-  border: 1px solid blue;
+  padding-top: 10px;
+  margin: 0 auto;
+  // border: 1px solid blue;
+  font-family: $ssPro;
+  // padding: 0 35px 0 35px;
+}
+.listNav {
+  display: flex;
+  // align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  border: 1px solid purple;
+  margin: 0 auto;
+  background: white;
+}
+.listTabs {
+  display: flex;
+  justify-content: space-between;
+  // margin-top: 100px;
+  border-bottom: 1px solid black;
+  align-items: center;
+  box-shadow: 0px -1px 2px 1px rgba(0, 0, 0, 0.1)inset;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+// .labelBox {
+//   display: flex;
+//   border: 1px solid black;
+//   justify-content: center;
+//   align-items: center;
+// }
+.name, .expDate, .purchDate, .storageType, .containerType, .label {
+  // margin: 5px;
+  width: 150px;
+  text-align: center;
+  // border: 1px solid purple;
+}
+.name {
+  // padding-top: 13px;
+  height: 40px;
+  border-radius: 10px 5px 5px 10px;
+}
+.nameBox {
+  text-align: center;
+  // display: flex;
+  // align-items: center;
+}
+.optDropDwn {
+  // display: none;
+}
+
+.purchDate {
+  // border-bottom: 1px solid green;
+  color: #7CE577;
+  height: 40px;
+}
+.pantry {
+  background: #846452;
+}
+.purColor {
+  background: #7CE577;
+}
+
+.storageType {
+  display: none;
 }
 .showSelector {
   display: flex;
@@ -51,9 +235,94 @@ nav {
   display: flex;
   align-items: center;
 }
-.labelBox {
+.sortBtnExp {
+  cursor: pointer;
+  background: #FF5E5B;;
+  border-radius: $btnRadius;
+  padding: $btnPadding;
+  margin: $btnMarginExp;
+  box-shadow: $btnShadow;
+  font-size: $btnFontSize;
+  // font-family: $ssPro;
+}
+.sortBtnPur {
+  cursor: pointer;
+  background: #7CE577;
+  border-radius: $btnRadius;
+  padding: $btnPadding;
+  margin: $btnMarginPur;
+  box-shadow: $btnShadow;
+  font-size: $btnFontSize;
+  // font-family: $ssPro;
+}
+.sortBtnExp:active {
+  padding-top: $btnTopPaddingACTIVE;
+  box-shadow: $btnShadowACTIVE;
+  margin-bottom: $btnBottomMarginACTIVE;
+}
+.sortBtnPur:active {
+  padding-top: $btnTopPaddingACTIVE;
+  box-shadow: $btnShadowACTIVE;
+  margin-bottom: $btnBottomMarginACTIVE;
+}
+.search {
+  outline: none;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding: 5px;
+  border-radius: 5px 5px 0 0;
+}
+.search:focus {
+  border-top: 1px solid #7CE577;
+  border-left: 1px solid #7CE577;
+  border-right: 1px solid #7CE577;
+}
+.storageInputs, .containerInputs {
   display: flex;
+}
+
+.tab {
+  cursor: pointer;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding: 5px;
+  border-radius: 5px 5px 0 0;
+}
+.tabRight {
+  display: flex;
+}
+.tabLeft {
+  margin-bottom: 0;
+}
+.tabUp {
+  font-size: 12px;
   border: 1px solid black;
+  border-radius: 20px 20px 0 0;
+  margin-right: 2px;
+  width: 253px;
+  padding: 10px 20px 10px 20px;
+  box-sizing: border-box;
+  // background: rgba(100, 100, 100, .5);
+}
+.tabUpTitle {
+  text-align: center;
+  margin-bottom: 2px;
+}
+.tabUpItem {
+  margin-bottom: 5px;
+}
+.tabUpFlexBox {
+  align-items: flex-end;
+  display: flex;
   justify-content: space-between;
-  align-items: center;
+  // border: 1px solid orange;
+}
+
+@media screen and (max-width: 423px) {
+  .colorKeyGhost {
+    // height: 145px;
+    border: 1px solid black;
+  }
 }
