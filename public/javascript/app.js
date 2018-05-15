@@ -6,10 +6,12 @@ app.controller('MainController', ['$http', function($http){
 	this.colorKey = true;
   this.foods = [];
   this.formData = {};
+	this.userFormData = {};
 	this.getStorage = "";
 	this.getContainer = "";
 	this.getUrl = "";
-	this.localURL = "http://localhost:3000/foods/";
+	this.localURL = "http://localhost:3000/";
+	this.user = {};
 	this.selectOrder = "";
 	this.foodStorage = document.getElementsByClassName("storageType");
 	this.foodItem = document.body.getElementsByClassName('foodItem');
@@ -46,11 +48,12 @@ app.controller('MainController', ['$http', function($http){
 		this.container = this.formData.container_id;
 		$http({
 			method: 'Post',
-			url: 'http://localhost:3000/storages/' + this.storage + '/containers/' + this.container + '/foods',
+			url: this.localURL + 'storages/' + this.storage + '/containers/' + this.container + '/foods',
 			data: this.formData
 		}).then(response => {
 			console.log('response: ', response.data.food);
 			this.foods.unshift(response.data.food);
+			this.formData = {};
 		}).catch(reject => {
 			console.log('reject: ', reject);
 		});
@@ -59,7 +62,7 @@ app.controller('MainController', ['$http', function($http){
 	this.deleteFoods = (id) => {
 		$http({
       method: 'DELETE',
-      url: this.localURL + id,
+      url: this.localURL + 'foods/' + id,
     }).then(response => {
 			console.log("ID: ", id);
 			const findId = () => {
@@ -74,7 +77,20 @@ app.controller('MainController', ['$http', function($http){
 	}
 
 	this.editFoods = () => {
-
+		$http({
+      method: 'PUT',
+      url: this.localURL + 'foods/' + id/*this.currentEdit._id*/,
+      data: this.currentEdit
+    }).then(response => {
+      if ($location.url() === '/') {
+        const updateByIndex = this.foods.findIndex(place => place._id === response.data._id)
+        this.places.splice(updateByIndex , 1, response.data)
+      }
+      this.place = response.data;
+      this.openShow(response.data);
+    }).catch(err => console.error('Catch', err));
+    this.edit = false;
+    this.currentEdit = {};
 	}
 
 /////////////////////
@@ -123,6 +139,53 @@ app.controller('MainController', ['$http', function($http){
 		};
 	};
 /////////////////////
+// Auth
+this.signup = () => {
+	$http({
+		method: 'POST',
+		url: this.localURL + 'users',
+		data: this.userFormData
+	}).then((response) => {
+
+	});
+};
+
+this.login = (userPass) => {
+	console.log(userPass);
+
+	$http({
+		method: 'POST',
+		url: this.localURL + 'users/login',
+		data: {user: {username: userPass.username, password: userPass.password}},
+	}).then((response) => {
+		console.log(response);
+		this.user = response.data.user;
+		console.log("this.user", this.user.username);
+		localStorage.setItem('token', JSON.stringify(response.data.token));
+	});
+};
+
+this.getUsers = () => {
+	$http({
+		url: this.localURL + 'users',
+		method: 'GET',
+		headers: {
+			Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+		}
+	}).then((response) => {
+		console.log(response);
+		if (response.data.status == 401) {
+			this.error = "Unauthorized";
+		} else {
+			this.users = response.data;
+		}
+	});
+};
+
+this.logout = () => {
+	localStorage.clear('token');
+	location.reload();
+}
 
   this.getFoods("all", "all");
 }]);

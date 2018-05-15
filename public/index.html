@@ -20,6 +20,25 @@
       </div>
     </nav>
 
+    <!-- Login Form -->
+    <form ng-submit="ctrl.login(userPass)">
+      <input type="text" ng-model="userPass.username" placeholder="username"/>
+      <input type="password" ng-model="userPass.password" placeholder="password"/>
+      <input type="submit"/>
+    </form>
+
+    <a href="#" ng-click="ctrl.logout()">Log Out</a>
+
+    <p>Logged in username: {{ctrl.user.username}} </p>
+
+    <h4 ng-click="ctrl.getUsers()">Click Here!</h4>
+
+    <div class="">{{ctrl.error}}</div>
+    <div class="" ng-repeat="user in ctrl.users">
+      <h1>{{user.username}}</h1>
+    </div>
+    <!-- End Login Form -->
+
     <main>
 
       <div class="tabUpFlexBox">
