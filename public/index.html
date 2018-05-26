@@ -6,159 +6,43 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <script src="/javascript/app.js"></script>
-
+    <script src="/javascript/animationTriggers.js"></script>
     <link rel="stylesheet" href="/css/main.css">
   </head>
   <body ng-controller="MainController as ctrl">
     <nav>
-      <div class="loginBox">
-        Login / Signup
+      <div class="navSec">
+        <div ng-if="ctrl.loggedIn == false">
+        <!-- <div class=""> -->
+          <span class="loginBtn" onClick="authModels('login')">Login</span> | <span class="signupBtn" onClick="authModels('signup')">Sign Up</span>
+        </div>
+        <div ng-if="ctrl.loggedIn == true">
+          <span class="logoutBtn" href="#" ng-click="ctrl.logout()">Log Out</span>
+        </div>
       </div>
-      <h1>Pantry</h1>
-      <div class="welcome Box">
-        Welcome User
+      <div class="navSec">
+        <h1>Pantry</h1>
+      </div>
+
+      <div class="navSec">
+        <p ng-if="ctrl.loggedIn == true">Welcome {{ctrl.user.username}}</p>
       </div>
     </nav>
 
-    <!-- Login Form -->
-    <form ng-submit="ctrl.login(userPass)">
-      <input type="text" ng-model="userPass.username" placeholder="username"/>
-      <input type="password" ng-model="userPass.password" placeholder="password"/>
-      <input type="submit"/>
-    </form>
-
-    <a href="#" ng-click="ctrl.logout()">Log Out</a>
-
-    <p>Logged in username: {{ctrl.user.username}} </p>
+    <div class="forms" ng-include="'/partials/forms.html'"></div>
 
     <h4 ng-click="ctrl.getUsers()">Click Here!</h4>
 
     <div class="">{{ctrl.error}}</div>
     <div class="" ng-repeat="user in ctrl.users">
       <h1>{{user.username}}</h1>
+      <p>{{user.id}}</p>
     </div>
     <!-- End Login Form -->
 
     <main>
-
-      <div class="tabUpFlexBox">
-        <div class="colorKeyGhost">
-          <div class="colorKey" ng-if="ctrl.colorKey == true">
-            <div class="left">
-              <div class="colorSet"><div class="color fridge"></div> Refridgerator
-              </div>
-              <div class="colorSet"><div class="color freezer"></div> Freezer
-              </div>
-              <div class="colorSet"><div class="color pantry"></div> Pantry
-              </div>
-            <div class="colorSet"><div class="color purColor"></div> Purchase Date
-            </div>
-              <div class="colorSet"><div class="color expColor"></div> Expiration Date
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="tabUp" ng-if="optionTU == true">
-          <!-- <div class="tabUpOptions" ng-if="optionTU == true"> -->
-            <!-- <div class="tabUpTitle">Options</div> -->
-            <div class="optDropDwn">
-              <div class="tabUpItem showSelector">
-                <div class="foodTabUpInput">
-                  <p>Show Only:</p>
-                  <form ng-submit="ctrl.getFoods(getStorage, getContainer)">
-                    <select class="storageOp" name="" ng-model="getStorage">
-                      <option value="all">All</option>
-                      <option value="fridge">Refridgerator</option>
-                      <option value="freezer">Freezer</option>
-                      <option value="pantry">Pantry</option>
-                      <option value="box">box</option>
-                      <option value="can">can</option>
-                      <option value="bag">bag</option>
-                    </select>
-                    <input class="submit" type="submit"/>
-                  </form>
-                </div>
-
-              </div>
-              <div class="tabUpItem sortSelector">
-                <div class="foodTabUpInput">
-                  <p>Sort By:</p>
-                  <div class="sortBtnExp" ng-click="ctrl.selectOrder = 'experation_date'">Expiration Date</div>
-                  <div class="sortBtnPur" ng-click="ctrl.selectOrder = 'purchased_date'">Purchase Date</div>
-                </div>
-
-                  <!-- <select class="storageOp" ng-model="selectOrder">
-                    <option value="purchased_date">Purchase Date</option>
-                    <option value="experation_date">Expiration Date</option>
-                  </select> -->
-              </div>
-              <p class="tabUpItem">Edit</p>
-            </div>
-          <!-- </div> -->
-          </div>
-          <div class="tabUp" ng-if="foodTU == true">
-            <!-- <div class="centerContent"> -->
-              <form ng-submit="ctrl.addFood()">
-                  <input class="foodFormInput" type="text" ng-model="ctrl.formData.name" placeholder="Name"> <br>
-                  <div class="foodTabUpInput">
-                    <p>Purchase Date:</p>
-                    <input class="foodFormInputDate" type="date" ng-model="ctrl.formData.purchased_date" placeholder="yyyy/mm/dd"/>
-                  </div>
-                  <div class="foodTabUpInput">
-                    <p>Expiration Date:</p>
-                    <input class="foodFormInputDate" type="date" ng-model="ctrl.formData.experation_date" placeholder="yyyy/mm/dd"/>
-                  </div>
-
-
-                <div class="foodTabUpInput">
-                  <p>Storage Type:</p>
-                  <select class="foodFormInputDate" name="" ng-model="ctrl.formData.storage_id">
-                    <option value="1">Refridgerator</option>
-                    <option value="2">Freezer</option>
-                    <option value="3">Pantry</option>
-                  </select>
-                </div>
-
-                <div class="foodTabUpInput">
-                  <p>Container Type:</p>
-                  <select class="foodFormInputDate" ng-model="ctrl.formData.container_id">
-                    <option value="1">box</option>
-                    <option value="2">can</option>
-                    <option value="3">bag</option>
-                  </select>
-                </div>
-
-                <input class="submit" type="submit"/>
-              </form>
-          </div>
-      </div>
-
-      <div class="listTabs">
-        <div class="tabLeft">
-          <div class="tab" ng-click="ctrl.colorKey = !ctrl.colorKey">Color Key</div>
-        </div>
-        <div class="tabRight">
-          <input class="search" placeholder="Search..." type="text" ng-model="search">
-          <div class="tab" ng-click="(optionTU = !optionTU) && (foodTU = false)">Options</div>
-          <div class="tab" ng-click="(foodTU = !foodTU) && (optionTU = false)">Add Food</div>
-        </div>
-      </div>
-
-      <div class="list">
-        <div class="foodBox">
-          <div class="foodItem" ng-repeat="food in ctrl.foods | filter:search | orderBy: ctrl.selectOrder"> <!-- ng-if="food.container_id == 1" -->
-            <div class="nameBox"> <span>{{food.container_id}}</span>
-              <h2 class="name">{{ food.name }}</h2>
-            </div>
-            <p class="storageType">{{food.storage_id}}</p>
-            <p class="purchDate">{{food.purchased_date}}</p>
-            <p class="expDate">{{food.experation_date}}</p>
-            <div class="delete" ng-click="ctrl.deleteFoods(food.id)">Delete</div>
-          </div>
-        </div>
-      </div>
+      <div class="" ng-if="ctrl.loggedIn == true" ng-include="'/partials/loggedIn.html'"></div>
+      <!-- <div class="" ng-include="'/partials/loggedOut.html'"></div> -->
     </main>
   </body>
 </html>

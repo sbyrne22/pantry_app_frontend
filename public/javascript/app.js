@@ -2,11 +2,21 @@ const app = angular.module('PantryApp', []);
 
 app.controller('MainController', ['$http', function($http){
 	// Models. Initial state
+	let login = false;
+	let signup = false;
+	this.optionTU = false;
+
 	this.hello = 'oh hai!';
+	this.loggedIn = false;
+	this.loginModel = false;
+	this.signupModel = false;
 	this.colorKey = true;
   this.foods = [];
   this.formData = {};
-	this.userFormData = {};
+	this.error = "";
+	this.currentUserId = null;
+	this.userId = null;
+	// this.userFormData = {};
 	this.getStorage = "";
 	this.getContainer = "";
 	this.getUrl = "";
@@ -36,7 +46,7 @@ app.controller('MainController', ['$http', function($http){
 	  }).then(response => {
 	    console.log("response: ", response);
 	    this.foods = response.data.foods;
-			setTimeout(this.decodeIds, .1);
+			setTimeout(decodeIds, .1);
 	  }).catch(reject => {
 	    console.log("reject ", reject);
 	  });
@@ -46,14 +56,16 @@ app.controller('MainController', ['$http', function($http){
     console.log("Form Data ", this.formData);
 		this.storage = this.formData.storage_id;
 		this.container = this.formData.container_id;
+		// data: { user: { username: userFormData.username, password: userFormData.password }},
 		$http({
 			method: 'Post',
-			url: this.localURL + 'storages/' + this.storage + '/containers/' + this.container + '/foods',
+			url: this.localURL + 'users/' + this.userId + '/storages/' + this.storage + '/containers/' + this.container + '/foods',
 			data: this.formData
 		}).then(response => {
 			console.log('response: ', response.data.food);
 			this.foods.unshift(response.data.food);
 			this.formData = {};
+			setTimeout(decodeIds, .1);
 		}).catch(reject => {
 			console.log('reject: ', reject);
 		});
@@ -76,11 +88,15 @@ app.controller('MainController', ['$http', function($http){
     }).catch(err => console.error('Catch', err));
 	}
 
-	this.editFoods = () => {
+	editTransform = () => {
+
+	}
+
+	this.editFoods = (editForm) => {
 		$http({
       method: 'PUT',
-      url: this.localURL + 'foods/' + id/*this.currentEdit._id*/,
-      data: this.currentEdit
+      url: this.localURL + 'foods/' + this.editForm._id,
+      data: this.editForm
     }).then(response => {
       if ($location.url() === '/') {
         const updateByIndex = this.foods.findIndex(place => place._id === response.data._id)
@@ -99,7 +115,7 @@ app.controller('MainController', ['$http', function($http){
 		this.foodItem[0].style.backgroundColor = "blue";
 	};
 
-	this.decodeIds = () => {
+	decodeIds = () => {
 		if (this.foodItem.length == 0) {
 			console.log("there are no foodItems");
 		} else {
@@ -138,30 +154,64 @@ app.controller('MainController', ['$http', function($http){
 			};
 		};
 	};
+
 /////////////////////
 // Auth
-this.signup = () => {
+this.signup = (userFormData) => {
 	$http({
 		method: 'POST',
 		url: this.localURL + 'users',
-		data: this.userFormData
-	}).then((response) => {
-
+		data: { user: { username: userFormData.username, password: userFormData.password }},
+	}).then(response => {
+		console.log(response);
+		this.error = '';
+		this.user = response.data.user;
+		this.loggedIn = true;
+		signup = false;
+		loginLogic();
+		localStorage.setItem('token', JSON.stringify(response.data.token));
+		this.userFormData = {};
+	}).catch(reject => {
+		console.log('reject: ', reject);
+		if (reject.status == 500) {
+			this.error = 'Username Taken';
+			console.log('username already taken');
+		} else if (reject.status == 700) {
+			console.log("Peaches");
+		}
 	});
 };
 
-this.login = (userPass) => {
-	console.log(userPass);
+this.login = (userFormData) => {
+	console.log(userFormData);
 
 	$http({
 		method: 'POST',
 		url: this.localURL + 'users/login',
-		data: {user: {username: userPass.username, password: userPass.password}},
-	}).then((response) => {
+		data: { user: { username: userFormData.username, password: userFormData.password }},
+	}).then(response => {
 		console.log(response);
-		this.user = response.data.user;
-		console.log("this.user", this.user.username);
-		localStorage.setItem('token', JSON.stringify(response.data.token));
+		console.log(response.data.status);
+		if (response.data.status == 401) {
+			console.log("Bad");
+			this.error = 'Username and/or Password is incorrect';
+		} else if (response.data.status == 200) {
+			console.log("Good");
+			this.error = '';
+			this.user = response.data.user;
+			this.userId = this.user.id;
+			console.log("this is userId:", this.userId);
+			this.loggedIn = true;
+			login = false;
+			loginLogic();
+			localStorage.setItem('token', JSON.stringify(response.data.token));
+			this.userFormData = {};
+			this.getFoods("all", "all");
+		}
+		// console.log("this.user", this.user.username);
+	}).catch(reject => {
+		console.log('reject: ', reject);
+		console.log("poop");
 	});
 };
 
@@ -187,5 +237,42 @@ this.logout = () => {
 	location.reload();
 }
 
-  this.getFoods("all", "all");
+
+
+
+	// Models
+
+	authModels = (btn) => {
+		if (btn == 'login') {
+			// console.log(btn);
+			login = !login;
+			signup = false;
+			// loginLogic();
+		} else if (btn == 'signup') {
+			// console.log(btn);
+			signup = !signup;
+			login = false;
+			// loginLogic();
+		}
+		loginLogic();
+	}
+
+	loginLogic = () => {
+		const loginModel = document.getElementById('loginModel');
+		const signUpModel = document.getElementById('signUpModel');
+		// console.log("Login", login);
+
+		if (login == true) {
+			loginModel.style.display = 'block';
+		} else if (login == false) {
+			loginModel.style.display = 'none';
+		};
+
+		if (signup == true) {
+			signUpModel.style.display = 'block';
+		} else if (signup == false) {
+			signUpModel.style.display = 'none';
+		};
+	};
+
 }]);

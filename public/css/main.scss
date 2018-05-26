@@ -4,6 +4,28 @@
 //   border: 1px solid purple;
 // }
 
+// Animations!!!!!!!!!!!!!!!!!
+
+@keyframes tabUp {
+  from {top: 150;}
+  to {top: 0;}
+}
+
+.optionsAnimateUp {
+  animation: tabUp .5s ease-out forwards 0s;
+  // z-index: 5;
+}
+
+@keyframes tabDown {
+  from {top: 0;}
+  to {top: 130;}
+}
+
+.optionsAnimateDown {
+  animation: tabDown .5s ease-out forwards 0s;
+  // z-index: 5;
+}
+
 $btnRadius: 5px;
 $btnPadding: 1px 2px 2px 2px;
 $btnMarginExp: 2px 4px 2px 4px;
@@ -18,9 +40,15 @@ $ssPro: 'Source Sans Pro', sans-serif;
 * {
   font-family: $ssPro;
 }
+body {
+  // border: 1px solid blue;
+}
 
 nav {
   text-align: center;
+  // position: fixed;
+  // width: 100%;
+  // left: 0;
   // background: yellow;
   border-top: 1px solid black;
   display: flex;
@@ -34,6 +62,15 @@ h1 {
 }
 p, h1, h2, h3, h4, h5 {
   margin: 0;
+}
+.navSec {
+  width: 33%;
+}
+.navSec:nth-of-type(1) {
+  text-align: left;
+}
+.navSec:nth-of-type(3) {
+  text-align: right;
 }
 
 .addBtn {
@@ -74,7 +111,7 @@ p, h1, h2, h3, h4, h5 {
   display: flex;
   // width: 273px;
   // height: 100px;
-  border-radius: 0 20px 20px 0;
+  border-radius: 0 8px 0px 0;
   border: 1px solid black;
   font-family: $ssPro;
 }
@@ -283,6 +320,10 @@ p, h1, h2, h3, h4, h5 {
 }
 
 .tab {
+  text-align: center;
+  position: relative;
+  // z-index: 0;
+  width: 80px;
   cursor: pointer;
   border-top: 1px solid black;
   border-left: 1px solid black;
@@ -290,21 +331,38 @@ p, h1, h2, h3, h4, h5 {
   padding: 5px;
   border-radius: 5px 5px 0 0;
 }
+#addFoodTab {
+  left: 163px;
+  z-index: 5;
+}
+#optionsTab {
+  left: 70px;
+  z-index: 5;
+}
 .tabRight {
   display: flex;
 }
 .tabLeft {
   margin-bottom: 0;
 }
-.tabUp {
+.tabContent {
+  position: relative;
   font-size: 12px;
-  border: 1px solid black;
-  border-radius: 20px 20px 0 0;
+  // border: 1px solid black;
+  // border-radius: 20px 20px 0 0;
   margin-right: 2px;
   width: 253px;
+  height: 150px;
   padding: 10px 20px 10px 20px;
   box-sizing: border-box;
   // background: rgba(100, 100, 100, .5);
+}
+#optionsContent {
+  background: rgba(255, 100, 100, .5);
+}
+#addFoodContent {
+  background: rgba(100, 255, 100, .5);
+  left: 3px;
 }
 .tabUpTitle {
   text-align: center;
@@ -317,8 +375,70 @@ p, h1, h2, h3, h4, h5 {
   align-items: flex-end;
   display: flex;
   justify-content: space-between;
-  // border: 1px solid orange;
+  border: 1px solid orange;
 }
+.tabSlideBox {
+  position: relative;
+  top: 150px;
+  // z-index: 5;
+  // border: 1px solid red;
+}
+#optionsTabUp {
+  left: 257px;
+}
+#addFoodTabUp {
+  // left: 100px;
+}
+.tabsContainer {
+  display: flex;
+  // border: 1px solid purple;
+  overflow: hidden;
+
+}
+
+// Login Form
+.loginBtn {
+  border-radius: 5px 0 0 5px;
+  border: 1px solid green;
+  border-right: none;
+  padding-left: 1px;
+  cursor: pointer;
+}
+.signupBtn {
+  border-radius: 0 5px 5px 0;
+  border: 1px solid red;
+  border-left: none;
+  padding-right: 1px;
+  cursor: pointer;
+}
+.logoutBtn {
+  cursor: pointer;
+}
+.model {
+  display: none;
+  width: 100%;
+  left: 0;
+  right: 0;
+  position: fixed;
+  background: rgba(100, 100, 100, .5);
+}
+  .loginForm {
+    width: 200px;
+
+    margin: 0 auto;
+    left: 35%;
+    // border: 1px solid red;
+    text-align: center;
+    padding: 20px;
+  }
+  .loginTF {
+    outline: none;
+    border: none;
+    border: 1px solid red;
+    // box-shadow: 0;
+    border-radius: 5px;
+  }
+// End Login Form
 
 @media screen and (max-width: 423px) {
   .colorKeyGhost {

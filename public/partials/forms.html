@@ -1,0 +1,27 @@
+<!-- Login Form -->
+<div class="model" id="loginModel">
+  <div class="loginForm">
+    <h3>Login</h3>
+    {{ctrl.error}}
+    <form ng-submit="ctrl.login(userFormData)">
+      <input class="loginTF" type="text" ng-model="userFormData.username" placeholder="username"/>
+      <input class="loginTF" type="password" ng-model="userFormData.password" placeholder="password"/><br>
+      <input type="submit"/>
+    </form>
+  </div>
+</div>
+<!-- End Login Form -->
+
+<!-- SignUp Form -->
+<div class="model" id="signUpModel">
+  <div class="loginForm">
+    <h3>Sign Up</h3>
+    {{ctrl.error}}
+    <form ng-submit="ctrl.signup(userFormData)">
+      <input class="loginTF" type="text" ng-model="userFormData.username" placeholder="username"/>
+      <input class="loginTF" type="password" ng-model="userFormData.password" placeholder="password"/><br>
+      <input type="submit"/>
+    </form>
+  </div>
+</div>
+<!-- End SignUp Form -->
